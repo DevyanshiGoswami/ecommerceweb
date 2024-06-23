@@ -1,4 +1,4 @@
-package com.ecom.configg;
+package com.ecom.config;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,11 +11,11 @@ import com.ecom.model.UserDtls;
 
 
 
-public class customuser implements UserDetails {
+public class CustomUser implements UserDetails {
 
 	private UserDtls user;
 
-	public customuser(UserDtls user) {
+	public CustomUser(UserDtls user) {
 		super();
 		this.user = user;
 	}

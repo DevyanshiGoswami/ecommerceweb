@@ -3,7 +3,7 @@ package com.ecom.services;
 
 import com.ecom.model.UserDtls;
 
-public interface userservice {
+public interface UserService {
 
 	public UserDtls saveuser(UserDtls user);
 

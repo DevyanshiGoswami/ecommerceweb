@@ -1,8 +1,13 @@
 package com.ecom.services;
 
 
-public interface commservice {
+import com.ecom.config.CustomUser;
+import com.ecom.model.UserDtls;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+public interface CommService {
 
 	public void removeSessionMessage();
 
-} 
+}

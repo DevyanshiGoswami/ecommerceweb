@@ -3,23 +3,23 @@ package com.ecom.services;
 
 import java.util.List;
 
-import com.ecom.model.product;
+import com.ecom.model.Product;
 import org.springframework.web.multipart.MultipartFile;
 
 
 
-public interface productservice {
+public interface ProductService {
 
-	public product saveProduct(product Product);
+	public Product saveProduct(Product product);
 
-	public List<product> getAllProducts();
+	public List<Product> getAllProducts();
 
 	public Boolean deleteProduct(Integer id);
 
-	public product getProductById(Integer id);
+	public Product getProductById(Integer id);
 
-	public product updateProduct(product product, MultipartFile file);
+	public Product updateProduct(Product product, MultipartFile file);
 
-	public List<product> getAllActiveProducts(String category);
+	public List<Product> getAllActiveProducts(String category);
 	
 }

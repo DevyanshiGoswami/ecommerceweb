@@ -22,22 +22,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ecom.model.category;
-import com.ecom.model.product;
-import com.ecom.services.categoryservice;
-import com.ecom.services.productservice;
+import com.ecom.model.Product;
+import com.ecom.model.Category;
+import com.ecom.services.CategoryService;
+import com.ecom.services.ProductService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
-public class admincontroller {
+public class AdminController {
 
 	@Autowired
-	private categoryservice categoryService;
+	private CategoryService categoryService;
 
 	@Autowired
-	private productservice productService;
+	private ProductService productService;
 
 	@GetMapping("/")
 	public String index() {
@@ -46,7 +46,7 @@ public class admincontroller {
 
 	@GetMapping("/loadAddProduct")
 	public String loadAddProduct(Model m) {
-		List<category> categories = categoryService.getAllCategory();
+		List<Category> categories = categoryService.getAllCategory();
 		m.addAttribute("categories", categories);
 		return "admin/add_product";
 	}
@@ -58,8 +58,8 @@ public class admincontroller {
 	}
 
 	@PostMapping("/saveCategory")
-	public String saveCategory(@ModelAttribute category category, @RequestParam("file") MultipartFile file,
-			HttpSession session) throws IOException {
+	public String saveCategory(@ModelAttribute Category category, @RequestParam("file") MultipartFile file,
+							   HttpSession session) throws IOException {
 
 		String imageName = file != null ? file.getOriginalFilename() : "default.jpg";
 		category.setImageName(imageName);
@@ -70,7 +70,7 @@ public class admincontroller {
 			session.setAttribute("errorMsg", "Category Name already exists");
 		} else {
 
-			category saveCategory = categoryService.saveCategory(category);
+			Category saveCategory = categoryService.saveCategory(category);
 
 			if (ObjectUtils.isEmpty(saveCategory)) {
 				session.setAttribute("errorMsg", "Not saved ! internal server error");
@@ -111,10 +111,10 @@ public class admincontroller {
 	}
 
 	@PostMapping("/updateCategory")
-	public String updateCategory(@ModelAttribute category category, @RequestParam("file") MultipartFile file,
-			HttpSession session) throws IOException {
+	public String updateCategory(@ModelAttribute Category category, @RequestParam("file") MultipartFile file,
+								 HttpSession session) throws IOException {
 
-		category oldCategory = categoryService.getCategoryById(category.getId());
+		Category oldCategory = categoryService.getCategoryById(category.getId());
 		String imageName = file.isEmpty() ? oldCategory.getImageName() : file.getOriginalFilename();
 
 		if (!ObjectUtils.isEmpty(category)) {
@@ -124,7 +124,7 @@ public class admincontroller {
 			oldCategory.setImageName(imageName);
 		}
 
-		category updateCategory = categoryService.saveCategory(oldCategory);
+		Category updateCategory = categoryService.saveCategory(oldCategory);
 
 		if (!ObjectUtils.isEmpty(updateCategory)) {
 
@@ -147,15 +147,15 @@ public class admincontroller {
 	}
 
 	@PostMapping("/saveProduct")
-	public String saveProduct(@ModelAttribute product Product, @RequestParam("file") MultipartFile image,
+	public String saveProduct(@ModelAttribute Product product, @RequestParam("file") MultipartFile image,
                               HttpSession session) throws IOException {
 
 		String imageName = image.isEmpty() ? "default.jpg" : image.getOriginalFilename();
 
-		Product.setImage(imageName);
-		Product.setDiscount(0);
-		Product.setDiscountPrice(Product.getPrice());
-		product saveProduct = productService.saveProduct(Product);
+		product.setImage(imageName);
+		product.setDiscount(0);
+		product.setDiscountPrice(product.getPrice());
+		Product saveProduct = productService.saveProduct(product);
 
 		if (!ObjectUtils.isEmpty(saveProduct)) {
 
@@ -200,20 +200,20 @@ public class admincontroller {
 	}
 
 	@PostMapping("/updateProduct")
-	public String updateProduct(@ModelAttribute product Product, @RequestParam("file") MultipartFile image,
+	public String updateProduct(@ModelAttribute Product product, @RequestParam("file") MultipartFile image,
 			HttpSession session, Model m) {
 
-		if (Product.getDiscount() < 0 || Product.getDiscount() > 100) {
+		if (product.getDiscount() < 0 || product.getDiscount() > 100) {
 			session.setAttribute("errorMsg", "invalid Discount");
 		} else {
-			product updateProduct = productService.updateProduct(Product, image);
+			Product updateProduct = productService.updateProduct(product, image);
 			if (!ObjectUtils.isEmpty(updateProduct)) {
 				session.setAttribute("succMsg", "Product update success");
 			} else {
 				session.setAttribute("errorMsg", "Something wrong on server");
 			}
 		}
-		return "redirect:/admin/editProduct/" + Product.getId();
+		return "redirect:/admin/editProduct/" + product.getId();
 	}
 
 }

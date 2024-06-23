@@ -6,16 +6,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class category {
+public class Category {
 
-    public category(int id, String name, String imageName, Boolean isActive) {
+    public Category(int id, String name, String imageName, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.imageName = imageName;
         this.isActive = isActive;
     }
 
-    public category() {
+    public Category() {
     }
 
     @Id

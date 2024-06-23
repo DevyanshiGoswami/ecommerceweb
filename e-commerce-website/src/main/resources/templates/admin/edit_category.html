@@ -20,7 +20,7 @@
 
 							<th:block th:if="${session.errorMsg}">
 								<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+								<th:block th:text="${@commServiceImpl.removeSessionMessage()}"></th:block>
 							</th:block>
 
 						</div>
@@ -64,9 +64,6 @@
 						</div>
 					</div>
 				</div>
-
-
-
 			</div>
 		</div>
 	</section>

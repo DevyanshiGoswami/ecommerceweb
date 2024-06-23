@@ -9,11 +9,11 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import com.ecom.model.UserDtls;
-import com.ecom.model.category;
-import com.ecom.model.product;
-import com.ecom.services.categoryservice;
-import com.ecom.services.productservice;
-import com.ecom.services.userservice;
+import com.ecom.model.Category;
+import com.ecom.model.Product;
+import com.ecom.services.CategoryService;
+import com.ecom.services.ProductService;
+import com.ecom.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -31,16 +31,16 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class homecontroller {
+public class HomeController {
 
 	@Autowired
-	private categoryservice categoryService;
+	private CategoryService categoryService;
 
 	@Autowired
-	private productservice productService;
+	private ProductService productService;
 
 	@Autowired
-	private userservice userService;
+	private UserService userService;
 
 	@GetMapping("/")
 	public String index() {
@@ -60,8 +60,8 @@ public class homecontroller {
 	@GetMapping("/products")
 	public String products(Model m, @RequestParam(value = "category", defaultValue = "") String category) {
 		// System.out.println("category="+category);
-		List<category> categories = categoryService.getAllActiveCategory();
-		List<product> products = productService.getAllActiveProducts(category);
+		List<Category> categories = categoryService.getAllActiveCategory();
+		List<Product> products = productService.getAllActiveProducts(category);
 		m.addAttribute("categories", categories);
 		m.addAttribute("products", products);
 	     m.addAttribute("paramValue", category);
@@ -70,7 +70,7 @@ public class homecontroller {
 
 	@GetMapping("/product/{id}")
 	public String product(@PathVariable int id, Model m) {
-		product productById = productService.getProductById(id);
+		Product productById = productService.getProductById(id);
 		 m.addAttribute("product", productById);
 		return "view_product";
 	}

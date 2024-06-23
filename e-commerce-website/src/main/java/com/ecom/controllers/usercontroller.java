@@ -2,7 +2,7 @@ package com.ecom.controllers;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Locale.Category;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ecom.model.UserDtls;
-import com.ecom.model.category;
-import com.ecom.services.categoryservice;
-import com.ecom.services.userservice;
+import com.ecom.model.Category;
+import com.ecom.services.CategoryService;
+import com.ecom.services.UserService;
 
 @Controller
 @RequestMapping("/user")
-public class usercontroller {
+public class UserController {
 	@Autowired
-	private userservice userService;
+	private UserService userService;
 	@Autowired
-	private categoryservice categoryService;
+	private CategoryService categoryService;
     @GetMapping("/")
     public String home(){
         return "user/home";
@@ -34,7 +34,7 @@ public class usercontroller {
 			m.addAttribute("user", userDtls);
 		}
 
-		List<category> allActiveCategory = categoryService.getAllActiveCategory();
+		List<Category> allActiveCategory = categoryService.getAllActiveCategory();
 		m.addAttribute("categorys", allActiveCategory);
 	}
 }
