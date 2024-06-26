@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Welcome to Spring Security Thymeleaf tutorial</title>
 </head>
 <body>
-<h1>User Home Page</h1>
+<h2>Welcome</h2>
+<p>Spring Security Thymeleaf tutorial</p>
+<div sec:authorize="hasRole('User')">
+    <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+</div>
+
+<div sec:authorize="hasRole('User')">Text visible to user.</div>
+<div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div>
+Authenticated username:
+<div sec:authentication="name"></div>
+Authenticated user's firstName:
+<div sec:authentication="principal.Name"></div>
+Authenticated user's lastName:
+<div sec:authentication="principal.lastName"></div>
+Authenticated user's email:
+<div sec:authentication="principal.email"></div>
+Authenticated user roles:
+<div sec:authentication="principal.authorities"></div>
 </body>
 </html>

@@ -1,18 +1,16 @@
-package com.ecom.services;
+package com.ecom.config;
 
-import com.ecom.config.CustomUser;
-import com.ecom.model.UserDtls;
-import com.ecom.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.ecom.model.UserDtls;
+import com.ecom.repositories.UserRepository;
+
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
-
-
 
     @Autowired
     private UserRepository userRepository;
@@ -27,4 +25,5 @@ public class UserDetailServiceImpl implements UserDetailsService {
         }
         return new CustomUser(user);
     }
+
 }

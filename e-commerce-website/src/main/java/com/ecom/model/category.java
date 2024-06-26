@@ -52,9 +52,6 @@ public class Category {
         this.imageName = imageName;
     }
 
-    public Boolean isIsActive() {
-        return this.isActive;
-    }
 
     public Boolean getIsActive() {
         return this.isActive;
