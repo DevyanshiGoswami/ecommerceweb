@@ -3,15 +3,15 @@ package com.ecom.repositories;
 import java.util.List;
 
 
-import com.ecom.model.category;
+import com.ecom.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 
-public interface categoryrepository extends JpaRepository<category, Integer> {
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
 	public Boolean existsByName(String name);
 
-	public List<category> findByIsActiveTrue();
+	public List<Category> findByIsActiveTrue();
 
 }

@@ -9,9 +9,9 @@ import jakarta.persistence.Id;
 
 
 @Entity
-public class product {
+public class Product {
 
-    public product(int id, String title, String description, String category, Double price, int stock, String image, int discount, Double discountPrice, Boolean isActive) {
+    public Product(int id, String title, String description, String category, Double price, int stock, String image, int discount, Double discountPrice, Boolean isActive) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -24,7 +24,7 @@ public class product {
         this.isActive = isActive;
     }
 
-    public product() {
+    public Product() {
     }
 
 	@Id

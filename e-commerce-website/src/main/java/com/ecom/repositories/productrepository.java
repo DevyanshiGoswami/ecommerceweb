@@ -4,14 +4,14 @@ package com.ecom.repositories;
 
 import java.util.List;
 
-import com.ecom.model.product;
+import com.ecom.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface productrepository extends JpaRepository<product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-	List<product> findByIsActiveTrue();
+	List<Product> findByIsActiveTrue();
 
-	List<product> findByCategory(String category);
+	List<Product> findByCategory(String category);
 
 } 

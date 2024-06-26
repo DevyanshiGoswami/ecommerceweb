@@ -1,5 +1,6 @@
-package com.ecom.configg;
+package com.ecom.config;
 
+import com.ecom.services.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,11 +13,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
-public class securityconfig {
+public class SecurityConfig {
 
 	@Autowired
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -24,7 +25,7 @@ public class securityconfig {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new userdetailserviceimpl();
+		return new UserDetailServiceImpl();
 	}
 
 	@Bean
@@ -41,13 +42,13 @@ public class securityconfig {
 		http.csrf(csrf->csrf.disable()).cors(cors->cors.disable())
 				.authorizeHttpRequests(req->req.requestMatchers("/user/**").hasRole("USER")
 				.requestMatchers("/admin/**").hasRole("ADMIN")
-				.requestMatchers("/**", "/").permitAll())
-				.formLogin(form->form.loginPage("/signin")
+				.requestMatchers("/**", "/", "/css/**", "/images/**").permitAll())
+				.formLogin(form->form.loginPage("/login")
 						.loginProcessingUrl("/login")
 //						.defaultSuccessUrl("/")
 						.successHandler(authenticationSuccessHandler))
 				.logout(logout->logout.permitAll());
-		
+
 		return http.build();
 	}
 

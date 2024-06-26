@@ -4,26 +4,26 @@ package com.ecom.services;
 
 import java.util.List;
 
-import com.ecom.model.category;
-import com.ecom.repositories.categoryrepository;
+import com.ecom.model.Category;
+import com.ecom.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 
 @Service
-public class categoryserviceimpl implements categoryservice {
+public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
-	private categoryrepository categoryRepository;
+	private CategoryRepository categoryRepository;
 
 	@Override
-	public category saveCategory(category Category) {
+	public Category saveCategory(Category Category) {
 		return categoryRepository.save(Category);
 	}
 
 	@Override
-	public List<category> getAllCategory() {
+	public List<Category> getAllCategory() {
 		return categoryRepository.findAll();
 	}
 
@@ -34,7 +34,7 @@ public class categoryserviceimpl implements categoryservice {
 
 	@Override
 	public Boolean deleteCategory(int id) {
-		category category = categoryRepository.findById(id).orElse(null);
+		Category category = categoryRepository.findById(id).orElse(null);
 
 		if (!ObjectUtils.isEmpty(category)) {
 			categoryRepository.delete(category);
@@ -44,14 +44,14 @@ public class categoryserviceimpl implements categoryservice {
 	}
 
 	@Override
-	public category getCategoryById(int id) {
-		category Category = categoryRepository.findById(id).orElse(null);
+	public Category getCategoryById(int id) {
+		Category Category = categoryRepository.findById(id).orElse(null);
 		return Category;
 	}
 
 	@Override
-	public List<category> getAllActiveCategory() {
-		List<category> Categories = categoryRepository.findByIsActiveTrue();
+	public List<Category> getAllActiveCategory() {
+		List<Category> Categories = categoryRepository.findByIsActiveTrue();
 		return Categories;
 	}
 

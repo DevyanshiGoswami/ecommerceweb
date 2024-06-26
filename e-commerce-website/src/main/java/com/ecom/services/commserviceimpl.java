@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Service
-public class commserviceimpl implements commservice {
+public class CommServiceImpl implements CommService {
 
 	@Override
 	public void removeSessionMessage() {

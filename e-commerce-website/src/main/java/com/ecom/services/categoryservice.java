@@ -1,21 +1,21 @@
 package com.ecom.services;
 
-import com.ecom.model.category;
+import com.ecom.model.Category;
 
 import java.util.List;
 
-public interface categoryservice {
+public interface CategoryService {
 
-	public category saveCategory(category Category);
+	public Category saveCategory(Category Category);
 
 	public Boolean existCategory(String name);
 
-	public List<category> getAllCategory();
+	public List<Category> getAllCategory();
 
 	public Boolean deleteCategory(int id);
 
-	public category getCategoryById(int id);
+	public Category getCategoryById(int id);
 
-	public List<category> getAllActiveCategory() ;
+	public List<Category> getAllActiveCategory() ;
 
 }
