@@ -16,25 +16,34 @@ import com.ecom.services.CategoryService;
 import com.ecom.services.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/profile")
 public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private CategoryService categoryService;
-    @GetMapping("/")
-    public String home(){
-        return "user/home";
-    }
+//    @GetMapping("/")
+//    public String home(){
+//        return "user/home";
+//    }
     @ModelAttribute
 	public void getUserDetails(Principal p, Model m) {
 		if (p != null) {
 			String email = p.getName();
-			UserDtls userDtls = userService.getUserByEmail(email);
-			m.addAttribute("user", userDtls);
+			UserDtls user = userService.getUserByEmail(email);
+			m.addAttribute("user", user);
 		}
 
 		List<Category> allActiveCategory = categoryService.getAllActiveCategory();
 		m.addAttribute("categorys", allActiveCategory);
 	}
-}
+
+
+		@GetMapping("/users")
+		public String getUserDetails(Model model) {
+			UserDtls user = new UserDtls();
+			model.addAttribute("users", user);
+			return "profile/users";  // This should match the name of your JSP file without the .jsp extension
+		}
+	}
+

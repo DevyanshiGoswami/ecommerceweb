@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.ecom.model.UserDtls;
 import com.ecom.repositories.UserRepository;
-import com.ecom.services.UserService;
 import com.ecom.util.AppConstant;
 
 @Service
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDtls saveUser(UserDtls user) {
-		user.setRole("ROLE_USER");
+		user.setRole("USER");
 		user.setIsEnable(true);
 		String encodePassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodePassword);
@@ -88,11 +87,6 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return false;
-	}
-
-	@Override
-	public void resetAttempt(int userId) {
-
 	}
 
 }

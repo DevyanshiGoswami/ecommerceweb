@@ -233,7 +233,7 @@ public class AdminController {
 		return "redirect:/admin/editProduct/" + product.getId();
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/usersofadmin")
 	public String getAllUsers(Model m) {
 		List<UserDtls> users = userService.getUsers("ROLE_USER");
 		m.addAttribute("users", users);
