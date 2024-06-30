@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
-<!--	  th:fragment="layout(content)">-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  th:fragment="layout(content)">
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Insert title here</title>
@@ -35,7 +35,7 @@
 										aria-current="page" href="/"><i class="fa-solid fa-house"></i>
 					Home</a></li>
 				<li class="nav-item"><a class="nav-link active"
-										aria-current="page" href="/products">Product</a></li>
+											aria-current="page" href="/products">Product</a></li>
 
 				<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" role="button"
@@ -67,7 +67,7 @@
 							class="fa-solid fa-user"></i> [[${user.name}]]
 					</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="profile/users">Profile</a></li>
+							<li><a class="dropdown-item" href="/profile">Profile</a></li>
 							<li><a class="dropdown-item" href="#">Another action</a></li>
 							<li><hr class="dropdown-divider"></li>
 
@@ -85,8 +85,7 @@
 </nav>
 <!-- End Navbar -->
 
-<!--<div th:replace="${content}"></div>-->
-<div layout:fragment="content"></div>
+<div th:replace="${content}"></div>
 
 <!-- Start Footer -->
 <div class="container-fluid p-1 bg-primary text-center text-white"

@@ -35,7 +35,7 @@ public class AuthFailureHandlerImpl extends SimpleUrlAuthenticationFailureHandle
 
         UserDtls userDtls = userRepository.findByEmail(email);
 
-        if (userDtls.getIsEnable()) {
+        if (userDtls.getEnable()) {
 
             if (userDtls.getAccountNonLocked()) {
 

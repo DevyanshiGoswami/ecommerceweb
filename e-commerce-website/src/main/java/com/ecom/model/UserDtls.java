@@ -12,6 +12,24 @@ import java.util.Date;
 @Entity
 public class UserDtls {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String name;
+    private String mobileNumber;
+    private String email;
+    private String address;
+    private String city;
+    private String state;
+    private String pincode;
+    private String password;
+    private String profileImage;
+    private String role;
+    private Boolean isEnable;
+    private Boolean accountNonLocked;
+    private Integer failedAttempt;
+    private Date lockTime;
+
     public UserDtls() {
     }
 
@@ -23,10 +41,6 @@ public class UserDtls {
         this.id = id;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     public String getName() {
         return name;
     }
@@ -34,8 +48,6 @@ public class UserDtls {
     public void setName(String name) {
         this.name = name;
     }
-
-    private String name;
 
     public String getMobileNumber() {
         return mobileNumber;
@@ -45,8 +57,6 @@ public class UserDtls {
         this.mobileNumber = mobileNumber;
     }
 
-    private String mobileNumber;
-
     public String getEmail() {
         return email;
     }
@@ -54,8 +64,6 @@ public class UserDtls {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    private String email;
 
     public String getAddress() {
         return address;
@@ -65,8 +73,6 @@ public class UserDtls {
         this.address = address;
     }
 
-    private String address;
-
     public String getCity() {
         return city;
     }
@@ -74,8 +80,6 @@ public class UserDtls {
     public void setCity(String city) {
         this.city = city;
     }
-
-    private String city;
 
     public String getState() {
         return state;
@@ -85,8 +89,6 @@ public class UserDtls {
         this.state = state;
     }
 
-    private String state;
-
     public String getPincode() {
         return pincode;
     }
@@ -94,8 +96,6 @@ public class UserDtls {
     public void setPincode(String pincode) {
         this.pincode = pincode;
     }
-
-    private String pincode;
 
     public String getPassword() {
         return password;
@@ -105,8 +105,6 @@ public class UserDtls {
         this.password = password;
     }
 
-    private String password;
-
     public String getProfileImage() {
         return profileImage;
     }
@@ -114,8 +112,6 @@ public class UserDtls {
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
     }
-
-    private String profileImage;
 
     public String getRole() {
         return role;
@@ -125,27 +121,21 @@ public class UserDtls {
         this.role = role;
     }
 
-    public Boolean getIsEnable() {
-        return this.isEnable;
+    public Boolean getEnable() {
+        return isEnable;
     }
 
-    public void setIsEnable(Boolean enable) {
-        this.isEnable = enable;
+    public void setEnable(Boolean enable) {
+        isEnable = enable;
     }
-
-    private String role;
-
-    private Boolean isEnable;
 
     public Boolean getAccountNonLocked() {
-        return this.accountNonLocked;
+        return accountNonLocked;
     }
 
     public void setAccountNonLocked(Boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
     }
-
-    private Boolean accountNonLocked;
 
     public Integer getFailedAttempt() {
         return failedAttempt;
@@ -155,17 +145,11 @@ public class UserDtls {
         this.failedAttempt = failedAttempt;
     }
 
-    private Integer failedAttempt;
-
     public Date getLockTime() {
-        return this.lockTime;
+        return lockTime;
     }
 
     public void setLockTime(Date lockTime) {
         this.lockTime = lockTime;
     }
-
-    private Date lockTime;
-
-
 }

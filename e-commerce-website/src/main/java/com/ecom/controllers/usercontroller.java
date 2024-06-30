@@ -22,28 +22,33 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private CategoryService categoryService;
-//    @GetMapping("/")
-//    public String home(){
-//        return "user/home";
-//    }
-    @ModelAttribute
-	public void getUserDetails(Principal p, Model m) {
+    @GetMapping()
+    public String home(Principal p, Model m){
 		if (p != null) {
 			String email = p.getName();
 			UserDtls user = userService.getUserByEmail(email);
-			m.addAttribute("user", user);
+			m.addAttribute("UserDtls", user);
 		}
+		return "profile/users";
+    }
+//    @ModelAttribute
+//	public void getUserDetails(Principal p, Model m) {
+//		if (p != null) {
+//			String email = p.getName();
+//			UserDtls user = userService.getUserByEmail(email);
+//			m.addAttribute("user", user);
+//		}
+//
+//		List<Category> allActiveCategory = categoryService.getAllActiveCategory();
+//		m.addAttribute("categorys", allActiveCategory);
+//	}
 
-		List<Category> allActiveCategory = categoryService.getAllActiveCategory();
-		m.addAttribute("categorys", allActiveCategory);
-	}
 
-
-		@GetMapping("/users")
-		public String getUserDetails(Model model) {
-			UserDtls user = new UserDtls();
-			model.addAttribute("users", user);
-			return "profile/users";  // This should match the name of your JSP file without the .jsp extension
-		}
+//		@GetMapping("/users")
+//		public String getUserDetails(Model model) {
+//			UserDtls user = new UserDtls();
+//			model.addAttribute("users", user);
+//			return "profile/users";  // This should match the name of your JSP file without the .jsp extension
+//		}
 	}
 

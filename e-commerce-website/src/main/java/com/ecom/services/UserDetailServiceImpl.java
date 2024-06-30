@@ -1,5 +1,6 @@
-package com.ecom.config;
+package com.ecom.services;
 
+import com.ecom.config.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

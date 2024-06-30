@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{base::layout(~{::section})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <title>User Profile</title>
 
 <head>
+    <meta charset="ISO-8859-1">
+    <title>User Details</title>
+</head>
 <body>
 <h1>User Profile</h1>
 
 <div>
     <h1> hello world</h1>
-<!--    <p>User ID: <span th:text="${userDtls.id}"></span></p>-->
-<!--    <p>Username: <span th:text="${userDtls.name}"></span></p>-->
-<!--    <p>Email: <span th:text="${UserDtls.email}"></span></p>-->
+    <p>User ID: <span th:text="${UserDtls.id}"></span></p>
+    <p>Username: <span th:text="${UserDtls.name}"></span></p>
+    <p>Email: <span th:text="${UserDtls.email}"></span></p>
+    <p>mobile: <span th:text="${UserDtls.mobileNumber}"></span></p>
+
 </div>
 </body>
 </html>
