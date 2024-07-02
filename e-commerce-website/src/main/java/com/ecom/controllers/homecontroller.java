@@ -17,6 +17,7 @@ import com.ecom.services.ProductService;
 import com.ecom.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
@@ -56,14 +58,32 @@ public class HomeController {
 	}
 
 	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
-
+	public String home(@AuthenticationPrincipal UserDtls user, Model model) {
+		if (user != null) {
+			model.addAttribute("role", user.getRole());
+		}
+		return "index";}
+//	@GetMapping("/admin/dashboard")
+//	public String dashboard(){
+//		return "admin/dashboard";
+//	}
 	@GetMapping("/login")
 	public String login() {
 		return "loginpage";
 	}
+//@GetMapping("/login")
+//public ModelAndView getProfilePage(@AuthenticationPrincipal UserDtls users) {
+//	if (users == null) {
+//		return new ModelAndView("redirect:/login");
+//	}
+//
+//	String role = users.getRole();
+//	if ("admin".equalsIgnoreCase(role)) {
+//		return new ModelAndView("redirect:/admin/dashboard");
+//	} else if ("user".equalsIgnoreCase(role)) {
+//		return new ModelAndView("redirect:/index");}
+//		 return new ModelAndView("loginpage");
+//	}
 
 	@GetMapping("/register")
 	public String register() {

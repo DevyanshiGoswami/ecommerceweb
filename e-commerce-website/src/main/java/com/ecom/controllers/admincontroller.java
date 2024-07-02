@@ -56,6 +56,10 @@ public class AdminController {
 		List<Category> allActiveCategory = categoryService.getAllActiveCategory();
 		m.addAttribute("categorys", allActiveCategory);
 	}
+	@GetMapping("/dashboard")
+	public String getadmin(){
+		return "admin/dashboard";
+	}
 	@GetMapping("/")
 	public String index() {
 		return "admin/index";

@@ -2,8 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	  th:replace="~{base::layout(~{::section})}">
 <head>
-	<meta charset="ISO-8859-1">
 	<title>Login</title>
+	<meta charset="UTF-8">
+<!--	<script type="text/javascript">-->
+<!--        function redirectBasedOnRole() {-->
+<!--            var role = /*[[${role}]]*/ 'DEFAULT';-->
+
+<!--            if (role === 'ADMIN') {-->
+<!--                window.location.href = '/admin/dashboard';-->
+<!--            } else if (role === 'USER') {-->
+<!--                window.location.href = '/index';-->
+<!--            } else {-->
+<!--                window.location.href = '/login';-->
+<!--            }-->
+<!--        }-->
+
+<!--        window.onload = redirectBasedOnRole;-->
+    </script>
+
 </head>
 <body>
 <section>
@@ -34,6 +50,8 @@
 					</div>
 					<div class="card-body">
 						<form action="/login" method="post">
+
+
 							<div class="mb-3">
 								<label class="form-label">Email</label> <input
 									class="form-control" name="username" type="email">
@@ -43,9 +61,15 @@
 								<label class="form-label">Password</label> <input
 									class="form-control" name="password" type="password">
 							</div>
+							<div class="mb-3">
+								<label class="form-label">role</label> <input
+									class="form-control" name="role" type="role">
+
+							</div>
 							<button type="submit"
 									class="btn bg-primary text-white col-md-12">Login</button>
 						</form>
+
 					</div>
 
 					<div class="card-footer text-center">
@@ -53,11 +77,11 @@
 						Don't have an account ? <a href="#" class="text-decoration-none">Create
 						one </a>
 					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
-
 </section>
 </body>
 </html>

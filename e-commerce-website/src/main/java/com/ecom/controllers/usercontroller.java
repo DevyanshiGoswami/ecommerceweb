@@ -1,19 +1,18 @@
 package com.ecom.controllers;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ecom.model.UserDtls;
-import com.ecom.model.Category;
 import com.ecom.services.CategoryService;
 import com.ecom.services.UserService;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/profile")
@@ -31,6 +30,7 @@ public class UserController {
 		}
 		return "profile/users";
     }
+
 //    @ModelAttribute
 //	public void getUserDetails(Principal p, Model m) {
 //		if (p != null) {

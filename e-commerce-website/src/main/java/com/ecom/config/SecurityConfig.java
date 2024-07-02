@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,12 +16,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  {
+public class SecurityConfig{
 
 	@Autowired
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
+	@Autowired
+	private AuthSuccessHandlerImpl authSuccessHandlerImpl;
 
 	@Autowired
 	@Lazy
@@ -41,22 +46,48 @@ public class SecurityConfig  {
 		authenticationProvider.setPasswordEncoder(passwordEncoder());
 		return authenticationProvider;
 	}
-
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
 	{
 		http.csrf(csrf->csrf.disable()).cors(cors->cors.disable())
-				.authorizeHttpRequests(req->req.requestMatchers("/user/**").hasRole("USER")
-				.requestMatchers("/admin/**").hasRole("ADMIN")
+				.authorizeHttpRequests(req->req.requestMatchers("/").hasRole("USER")
+				.requestMatchers("/admin/dashboard").hasRole("ADMIN")
 				.requestMatchers("/**").permitAll())
 				.formLogin(form->form.loginPage("/login")
 						.loginProcessingUrl("/login")
-						.defaultSuccessUrl("/base")
+						//.defaultSuccessUrl("/")
 						.successHandler(authenticationSuccessHandler))
 				.logout(logout->logout.permitAll());
 
-		return http.build();
-	}
+		return http.build();}}
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http
+//				.authorizeRequests()
+//				.antMatchers("/login").permitAll()
+//				.anyRequest().authenticated()
+//				.and()
+//				.formLogin()
+//				.loginPage("/login")
+//				.successHandler(authSuccessHandlerImpl)
+//				.permitAll()
+//				.and()
+//				.logout()
+//				.permitAll()
+//				.and()
+//				.exceptionHandling()
+//				.accessDeniedPage("/access-denied");
+//
+//		http.csrf().disable();
+//	}
+//
+//	@Autowired
+//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		UserDetailsService userDetailsService = null;
+//		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//	}}
 
-
-}
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}}

@@ -53,4 +53,7 @@ public class CustomUser implements UserDetails {
 		return user.getEnable();
 	}
 
+	public String getRole() {
+		return user.getRole();
+	}
 }
