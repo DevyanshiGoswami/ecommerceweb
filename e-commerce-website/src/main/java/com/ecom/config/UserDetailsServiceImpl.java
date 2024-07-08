@@ -9,7 +9,6 @@ package com.ecom.config;
         import com.ecom.model.UserDtls;
         import com.ecom.repositories.UserRepository;
 
-        import java.util.Collections;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -26,10 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("user not found");
         }
-//        return new CustomUser(user);}
-     return new org.springframework.security.core.userdetails.User(
-             user.getName(),
-             user.getPassword(),
-             Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
-            );
-}}
+        return new CustomUser(user);}
+//     return new org.springframework.security.core.userdetails.User(
+//             user.getName(),
+//             user.getPassword(),
+//             Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+//            );
+}

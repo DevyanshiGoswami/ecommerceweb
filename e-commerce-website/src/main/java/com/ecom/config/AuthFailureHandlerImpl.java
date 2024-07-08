@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class AuthFailureHandlerImpl extends SimpleUrlAuthenticationFailureHandler {
 
-    @Autowired
+    @Autowired(required=true)
     private UserRepository userRepository;
 
     @Autowired

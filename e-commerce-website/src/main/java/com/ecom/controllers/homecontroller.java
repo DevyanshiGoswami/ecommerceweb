@@ -58,11 +58,8 @@ public class HomeController {
 	}
 
 	@GetMapping("/")
-	public String home(@AuthenticationPrincipal UserDtls user, Model model) {
-		if (user != null) {
-			model.addAttribute("role", user.getRole());
-		}
-		return "index";}
+	public String index(){
+		return "/index";}
 //	@GetMapping("/admin/dashboard")
 //	public String dashboard(){
 //		return "admin/dashboard";

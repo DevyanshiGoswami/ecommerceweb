@@ -21,17 +21,17 @@ public class AuthSuccessHandlerImpl implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 
-//		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
 		Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
-		if(roles.contains("ADMIN"))
+		if(roles.contains("ROLE_ADMIN"))
 		{
 			response.sendRedirect("/admin/dashboard");
-		}else if (roles.contains("USER")) {
-			response.sendRedirect("/");}
-		else {
-			response.sendRedirect("/login?error");
+		}else if (roles.contains("ROLE_USER")) {
+			response.sendRedirect("/");
+		} else {
+			response.sendRedirect("/");
 		}
 	}
 
