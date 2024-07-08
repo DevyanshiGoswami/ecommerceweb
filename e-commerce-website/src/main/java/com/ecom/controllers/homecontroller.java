@@ -12,6 +12,7 @@ import java.util.List;
 import com.ecom.model.UserDtls;
 import com.ecom.model.Category;
 import com.ecom.model.Product;
+import com.ecom.services.CartService;
 import com.ecom.services.CategoryService;
 import com.ecom.services.ProductService;
 import com.ecom.services.UserService;
@@ -43,6 +44,9 @@ public class HomeController {
 	private ProductService productService;
 
 	@Autowired
+	private CartService cartService;
+
+	@Autowired
 	private UserService userService;
 
 	@ModelAttribute
@@ -51,6 +55,8 @@ public class HomeController {
 			String email = p.getName();
 			UserDtls userDtls = userService.getUserByEmail(email);
 			m.addAttribute("user", userDtls);
+			Integer countCart = cartService.getCountCart(userDtls.getId());
+			m.addAttribute("countCart", countCart);
 		}
 
 		List<Category> allActiveCategory = categoryService.getAllActiveCategory();
@@ -60,27 +66,15 @@ public class HomeController {
 	@GetMapping("/")
 	public String index(){
 		return "/index";}
-//	@GetMapping("/admin/dashboard")
-//	public String dashboard(){
-//		return "admin/dashboard";
-//	}
+	@GetMapping("/dashboard")
+	public String dashboard(){
+		return "admin/dashboard";
+	}
 	@GetMapping("/login")
 	public String login() {
 		return "loginpage";
 	}
-//@GetMapping("/login")
-//public ModelAndView getProfilePage(@AuthenticationPrincipal UserDtls users) {
-//	if (users == null) {
-//		return new ModelAndView("redirect:/login");
-//	}
-//
-//	String role = users.getRole();
-//	if ("admin".equalsIgnoreCase(role)) {
-//		return new ModelAndView("redirect:/admin/dashboard");
-//	} else if ("user".equalsIgnoreCase(role)) {
-//		return new ModelAndView("redirect:/index");}
-//		 return new ModelAndView("loginpage");
-//	}
+
 
 	@GetMapping("/register")
 	public String register() {

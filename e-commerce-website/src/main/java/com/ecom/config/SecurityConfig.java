@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import java.io.IOException;
+
 
 @Configuration
 @EnableWebSecurity
@@ -26,7 +28,6 @@ public class SecurityConfig {
 	@Autowired
 	@Lazy
 	private AuthFailureHandlerImpl authenticationFailureHandler;
-
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -46,15 +47,21 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-			http.csrf(csrf -> csrf.disable()).cors(cors -> cors.disable())
-					.authorizeHttpRequests(req -> req.requestMatchers("/user/**").hasRole("USER")
-							.requestMatchers("/admin/**").hasRole("ADMIN")
-							.requestMatchers("/**").permitAll())
-					.formLogin(form -> form.loginPage("/login")
-							.loginProcessingUrl("/login")
-							//.defaultSuccessUrl("/")
-							.successHandler(authenticationSuccessHandler))
-					.logout(logout -> logout.permitAll());
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
+	{
+		http.csrf(csrf->csrf.disable()).cors(cors->cors.disable())
+				.authorizeHttpRequests(req->req.requestMatchers("/user/**").hasRole("USER")
+						.requestMatchers("/admin/**").hasRole("ADMIN")
+						.requestMatchers("/**").permitAll())
+				.formLogin(form->form.loginPage("/login")
+						.loginProcessingUrl("/login")
+//						.defaultSuccessUrl("/")
+						.failureHandler(authenticationFailureHandler)
+						.successHandler(authenticationSuccessHandler))
+				.logout(logout->logout.permitAll());
+
 		return http.build();
-		}}
+	}
+
+
+	}

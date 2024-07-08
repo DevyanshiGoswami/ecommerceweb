@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class AuthFailureHandlerImpl extends SimpleUrlAuthenticationFailureHandler {
 
-    @Autowired(required=true)
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -58,7 +58,7 @@ public class AuthFailureHandlerImpl extends SimpleUrlAuthenticationFailureHandle
             exception = new LockedException("your account is inactive");
         }
 
-        super.setDefaultFailureUrl("/login?error");
+        super.setDefaultFailureUrl("/signin?error");
         super.onAuthenticationFailure(request, response, exception);
     }
 

@@ -20,16 +20,20 @@ import jakarta.persistence.Transient;
 
         @ManyToOne
         private Product product;
+        private Integer quantity;
 
-        public Cart() {
+        @Transient
+        private Double totalPrice;
+        @Transient
+        private Double totalOrderPrice;
+
+
+        public Double getTotalOrderPrice() {
+            return totalOrderPrice;
         }
 
-        public Cart(Integer id, UserDtls user, Product product, Integer quantity, Double totalPrice) {
-            this.id = id;
-            this.user = user;
-            this.product = product;
-            this.quantity = quantity;
-            this.totalPrice = totalPrice;
+        public void setTotalOrderPrice(Double totalOrderPrice) {
+            this.totalOrderPrice = totalOrderPrice;
         }
 
         public Integer getId() {
@@ -72,10 +76,15 @@ import jakarta.persistence.Transient;
             this.totalPrice = totalPrice;
         }
 
-        private Integer quantity;
-
-        @Transient
-        private Double totalPrice;
+        public Cart() {}
+        public Cart(Integer id, UserDtls user, Product product, Integer quantity, Double totalPrice,Double totalorderprice) {
+            this.id = id;
+            this.user = user;
+            this.product = product;
+            this.quantity = quantity;
+            this.totalPrice = totalPrice;
+            this.totalOrderPrice=totalorderprice;
+        }
 
     }
 
