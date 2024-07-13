@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	  th:replace="~{base::layout(~{::section})}">
+	  th:replace="~{basee::layout(~{::section})}">
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Insert title here</title>
@@ -41,7 +41,7 @@
 					<tbody>
 					<tr th:each="p,c:${products}">
 						<th scope="row">[[${c.count}]]</th>
-						<td><img th:src="@{'/img/category_img/'+${p.image}}"
+						<td><img th:src="@{'/img/product_img/'+${p.image}}"
 								 width="70px" height="70px"></td>
 						<td>[[${p.title}]]</td>
 						<td>[[${p.category}]]</td>
@@ -50,7 +50,7 @@
 						<td>[[${p.discountPrice}]]</td>
 						<td>[[${p.isActive}]]</td>
 						<td>[[${p.stock}]]</td>
-						<td><a th:href="@{'/admin/edit_product/'+${p.id}}"
+						<td><a th:href="@{'/admin/editProduct/'+${p.id}}"
 							   class="btn btn-sm btn-primary"><i
 								class="fa-solid fa-pen-to-square"></i>Edit</a> <a
 								th:href="@{'/admin/deleteProduct/'+${p.id}}"

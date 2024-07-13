@@ -15,12 +15,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ecom.model.Product;
@@ -33,7 +28,7 @@ import com.ecom.services.UserService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping(value="/admin")
 public class AdminController {
 
 	@Autowired
@@ -56,7 +51,7 @@ public class AdminController {
 		List<Category> allActiveCategory = categoryService.getAllActiveCategory();
 		m.addAttribute("categorys", allActiveCategory);
 	}
-	@GetMapping("/")
+	@GetMapping("/i")
 	public String index() {
 		return "admin/index";
 	}
@@ -192,11 +187,11 @@ public class AdminController {
 		return "redirect:/admin/loadAddProduct";
 	}
 
-	// @GetMapping("/products")
-	// public String loadViewProduct(Model m) {
-	// 	m.addAttribute("products", productService.getAllProducts());
-	// 	return "admin/products";
-	// }
+	 @GetMapping("/products")
+	 public String loadViewProduct(Model m) {
+	 	m.addAttribute("products", productService.getAllProducts());
+	 	return "admin/products";
+	 }
 
 	@GetMapping("/deleteProduct/{id}")
 	public String deleteProduct(@PathVariable int id, HttpSession session) {
@@ -233,12 +228,13 @@ public class AdminController {
 		return "redirect:/admin/editProduct/" + product.getId();
 	}
 
-	@GetMapping("/usersofadmin")
+	@GetMapping("/users")
 	public String getAllUsers(Model m) {
-		List<UserDtls> users = userService.getUsers("ROLE_USER");
+		List<UserDtls> users = userService.getUsers("USER");
 		m.addAttribute("users", users);
-		return "/admin/user";
+		return "/admin/users";
 	}
+
 
 	@GetMapping("/updateSts")
 	public String updateUserAccountStatus(@RequestParam Boolean status, @RequestParam Integer id, HttpSession session) {
@@ -248,7 +244,7 @@ public class AdminController {
 		} else {
 			session.setAttribute("errorMsg", "Something wrong on server");
 		}
-		return "redirect:/admin/user";
+		return "redirect:/admin/users";
 	}
 
 }

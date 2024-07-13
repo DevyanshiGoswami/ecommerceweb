@@ -1,22 +1,174 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
-<title>User Profile</title>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="ISO-8859-1">
-    <title>User Details</title>
+    <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #e8f0f2;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://img.freepik.com/free-vector/ecommerce-web-store-hand-drawn-illustration_107791-10966.jpg'); /* Replace with your background image URL */
+            background-size: cover;
+        }
+        .container {
+            width: 40%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .container:hover {
+            transform: scale(1.02);
+        }
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #0056b3;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .profile-section {
+          display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .profile-section img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border: 3px solid #007bff;
+        }
+        .profile-section div {
+            flex-grow: 1;
+        }
+        .profile-section h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+        .profile-section p {
+            margin: 5px 0 0;
+            color: #666;
+        }
+        .profile-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .profile-details li {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .profile-details li:last-child {
+            border-bottom: none;
+        }
+        .profile-details li span {
+            color: #333;
+        }
+        .profile-details li span.label {
+            font-weight: 600;
+            color: #555;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px 20px;
+            background-color: #f1f1f1;
+        }
+        .footer a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid #007bff;
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .footer a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            .profile-section {
+                padding: 20px 15px; /* Adjusted padding for smaller screens */
+            }
+            .profile-section div {
+                text-align: center;
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<h1>User Profile</h1>
 
-<div>
-    <h1> hello world</h1>
-    <p>User ID: <span th:text="${UserDtls.id}"></span></p>
-    <p>Username: <span th:text="${UserDtls.name}"></span></p>
-    <p>Email: <span th:text="${UserDtls.email}"></span></p>
-    <p>mobile: <span th:text="${UserDtls.mobileNumber}"></span></p>
-    <p>role: <span th:text="${UserDtls.role}"></span></p>
-
+<div class="container">
+    <div class="header">
+        <h2>User Profile</h2>
+    </div>
+    <div class="profile-section">
+        <img src="path/to/user/profile/image.jpg" alt="User Image">
+        <div>
+            <h3 th:text="${UserDtls.name}">Username</h3>
+            <p th:text="${UserDtls.email}">user@example.com</p>
+        </div>
+        <li class="nav-item"><a class="nav-link active"
+                                aria-current="page" href="/logout"><i
+                class="fa-solid fa-right-to-bracket"></i> Logout</a></li>
+    </div>
+    <ul class="profile-details">
+        <li>
+            <span class="label">User ID:</span> <span th:text="${UserDtls.id}">12345</span>
+        </li>
+        <li>
+            <span class="label">Mobile:</span> <span th:text="${UserDtls.mobileNumber}">+91 9876543210</span>
+        </li>
+        <li>
+            <span class="label">Role:</span> <span th:text="${UserDtls.role}">USER</span>
+        </li>
+        <li>
+            <span class="label">PinCode:</span> <span th:text="${UserDtls.pincode}">USER</span>
+        </li>
+        <li>
+            <span class="label">Address:</span> <span th:text="${UserDtls.address}">USER</span>
+        </li>
+        <li>
+            <span class="label">City:</span> <span th:text="${UserDtls.city}">USER</span>
+        </li>
+        <li>
+            <span class="label">State:</span> <span th:text="${UserDtls.state}">USER</span>
+        </li>
+        <li>
+            <span class="label">Id:</span> <span th:text="${UserDtls.id}">USER</span>
+        </li>
+        <li>
+            <span class="label">DateTime:</span> <span th:text="${UserDtls.lockTime}">USER</span>
+        </li>
+    </ul>
+    <div class="footer">
+        <a href="/edit-profile"><i class="fas fa-edit"></i> Edit Profile</a>
+    </div>
 </div>
 </body>
 </html>

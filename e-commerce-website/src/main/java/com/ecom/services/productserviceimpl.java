@@ -89,7 +89,7 @@ public class ProductServiceImpl implements ProductService {
 					e.printStackTrace();
 				}
 			}
-			return product;
+			return updateProduct;
 		}
 		return null;
 	}

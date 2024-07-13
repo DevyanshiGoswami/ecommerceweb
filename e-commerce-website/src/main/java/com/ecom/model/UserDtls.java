@@ -30,6 +30,16 @@ public class UserDtls {
     private Integer failedAttempt;
     private Date lockTime;
 
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
+    private String resetToken;
+
     public UserDtls() {
     }
 

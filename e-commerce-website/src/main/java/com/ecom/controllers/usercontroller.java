@@ -7,7 +7,6 @@ import com.ecom.model.Category;
 import com.ecom.services.CartService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
@@ -20,7 +19,6 @@ import com.ecom.services.CategoryService;
 import com.ecom.services.UserService;
 import com.ecom.model.Cart;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/profile")
@@ -45,7 +43,7 @@ public class UserController {
 		if (p != null) {
 			String email = p.getName();
 			UserDtls userDtls = userService.getUserByEmail(email);
-			m.addAttribute("UserDtls", userDtls);
+			m.addAttribute("user", userDtls);
 			Integer countCart = cartService.getCountCart(userDtls.getId());
 			m.addAttribute("countCart", countCart);
 		}
@@ -60,11 +58,12 @@ public class UserController {
 
 		if (ObjectUtils.isEmpty(saveCart)) {
 			session.setAttribute("errorMsg", "Product add to cart failed");
-		}else {
+		} else {
 			session.setAttribute("succMsg", "Product added to cart");
 		}
 		return "redirect:/product/" + pid;
 	}
+
 	@GetMapping("/cart")
 	public String loadCartPage(Principal p, Model m) {
 
@@ -75,13 +74,13 @@ public class UserController {
 			Double totalOrderPrice = carts.get(carts.size() - 1).getTotalOrderPrice();
 			m.addAttribute("totalOrderPrice", totalOrderPrice);
 		}
-		return "/user/cart";
+		return "/profile/cart";
 	}
 
 	@GetMapping("/cartQuantityUpdate")
 	public String updateCartQuantity(@RequestParam String sy, @RequestParam Integer cid) {
 		cartService.updateQuantity(sy, cid);
-		return "redirect:/user/cart";
+		return "redirect:/profile/cart";
 	}
 
 	private UserDtls getLoggedInUserDetails(Principal p) {
@@ -89,6 +88,7 @@ public class UserController {
 		UserDtls userDtls = userService.getUserByEmail(email);
 		return userDtls;
 	}
+
 
 //    @ModelAttribute
 //	public void getUserDetails(Principal p, Model m) {
