@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -52,6 +53,10 @@ public class SecurityConfig {
 		http.csrf(csrf->csrf.disable()).cors(cors->cors.disable())
 				.authorizeHttpRequests(req->req.requestMatchers("/userindex").hasRole("USER")
 						.requestMatchers("/admin/users").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.POST,"/reset-password").permitAll()
+						.requestMatchers(HttpMethod.POST,"/forgot-password").permitAll()
+						.requestMatchers(HttpMethod.GET,"/forgot-password").permitAll()
+//						.requestMatchers(HttpMethod.GET,"/reset-password").permitAll()
 						.requestMatchers("/**").permitAll()
 						.anyRequest().authenticated())
 				.formLogin(form->form.loginPage("/login")

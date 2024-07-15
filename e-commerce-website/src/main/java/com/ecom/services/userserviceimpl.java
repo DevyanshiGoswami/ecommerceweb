@@ -89,8 +89,10 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 	@Override
-	public void resetAttempt(int userId) {
-
+	public void resetAttempt(UserDtls user) {
+//		String encodePassword = passwordEncoder.encode(plainTextPassword);
+//		user.setPassword(encodePassword);
+		userRepository.save(user);
 	}
 
 	@Override
@@ -108,6 +110,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDtls updateUser(UserDtls user) {
 		return userRepository.save(user);
+	}
+	@Override
+	public UserDtls findById (Long id){
+		return userRepository.findById(id);
 	}
 
 }

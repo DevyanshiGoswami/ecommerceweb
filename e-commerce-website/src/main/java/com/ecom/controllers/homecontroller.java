@@ -2,14 +2,12 @@ package com.ecom.controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
-import java.util.UUID;
 
 import com.ecom.model.UserDtls;
 import com.ecom.model.Category;
@@ -18,7 +16,6 @@ import com.ecom.services.CartService;
 import com.ecom.services.CategoryService;
 import com.ecom.services.ProductService;
 import com.ecom.services.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,8 +32,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import jakarta.servlet.http.HttpSession;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
@@ -136,10 +131,10 @@ public class HomeController {
 
 		return "redirect:/register";
 	}
-	@GetMapping("/forgot-password")
-	public String showForgotPassword() {
-		return "forgot_password.html";
-	}
+//	@GetMapping("/forgot-password")
+//	public String showForgotPassword() {
+//		return "forgot_password.html";
+//	}
 
 //	@PostMapping("/forgot-password")
 //	public String processForgotPassword(@RequestParam String email, HttpSession session, HttpServletRequest request)
@@ -171,38 +166,38 @@ public class HomeController {
 //		return "redirect:/forgot-password";
 //	}
 
-	@GetMapping("/reset-password")
-	public String showResetPassword(@RequestParam String token, HttpSession session, Model m) {
-
-		UserDtls userByToken = userService.getUserByToken(token);
-
-		if (userByToken == null) {
-			m.addAttribute("msg", "Your link is invalid or expired !!");
-			return "message";
-		}
-		m.addAttribute("token", token);
-		return "reset_password";
-	}
-
-	@PostMapping("/reset-password")
-	public String resetPassword(@RequestParam String token, @RequestParam String password, HttpSession session,
-								Model m) {
-
-		UserDtls userByToken = userService.getUserByToken(token);
-		if (userByToken == null) {
-			m.addAttribute("errorMsg", "Your link is invalid or expired !!");
-			return "message";
-		} else {
-			userByToken.setPassword(passwordEncoder.encode(password));
-			userByToken.setResetToken(null);
-			userService.updateUser(userByToken);
-			// session.setAttribute("succMsg", "Password change successfully");
-			m.addAttribute("msg", "Password change successfully");
-
-			return "message";
-		}
-
-	}
+//	@GetMapping("/reset-password")
+//	public String showResetPassword(@RequestParam String token, HttpSession session, Model m) {
+//
+//		UserDtls userByToken = userService.getUserByToken(token);
+//
+//		if (userByToken == null) {
+//			m.addAttribute("msg", "Your link is invalid or expired !!");
+//			return "message";
+//		}
+//		m.addAttribute("token", token);
+//		return "reset_password";
+//	}
+//
+//	@PostMapping("/reset-password")
+//	public String resetPassword(@RequestParam String token, @RequestParam String password, HttpSession session,
+//								Model m) {
+//
+//		UserDtls userByToken = userService.getUserByToken(token);
+//		if (userByToken == null) {
+//			m.addAttribute("errorMsg", "Your link is invalid or expired !!");
+//			return "message";
+//		} else {
+//			userByToken.setPassword(passwordEncoder.encode(password));
+//			userByToken.setResetToken(null);
+//			userService.updateUser(userByToken);
+//			// session.setAttribute("succMsg", "Password change successfully");
+//			m.addAttribute("msg", "Password change successfully");
+//
+//			return "message";
+//		}
+//
+//	}
 
 
 }

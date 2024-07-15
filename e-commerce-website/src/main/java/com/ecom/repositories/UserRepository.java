@@ -13,4 +13,5 @@ public interface UserRepository extends JpaRepository<UserDtls, Integer> {
 
     public UserDtls findByResetToken(String token);
 
+    public UserDtls findById(Long id);
 }
