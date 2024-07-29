@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface ProductOrderRepository extends JpaRepository<ProductOrder, Integer> {
     List<ProductOrder> findByStatus(String status);
-    public ProductOrder findById(int id);
+
+    public ProductOrder findByOrderId(String id);
+    public List<ProductOrder> findByUserId(int id);
 }

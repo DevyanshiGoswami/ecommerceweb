@@ -11,7 +11,9 @@ public interface OrderService {
 
     public void saveOrder(Integer userid,OrderRequest orderRequest);
     public List<ProductOrder> getOrdersByStatus(String status);
-    public ProductOrder getOrderById(int id);
+    public ProductOrder getOrderById(String id);
+
+    public List<ProductOrder> getOrderByUserId(int userId);
     public List<ProductOrder> getAllOrders();
 //    public List<ProductOrder> getAllOrders(String status);
 }

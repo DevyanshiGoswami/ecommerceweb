@@ -62,8 +62,8 @@ public class OrderServiceImpl implements OrderService {
 
         }
     }
-    public void updateOrderStatus(int orderId, String newStatus) {
-        ProductOrder order = orderRepository.findById(orderId);
+    public void updateOrderStatus(String orderId, String newStatus) {
+        ProductOrder order = orderRepository.findByOrderId(orderId);
         order.setStatus(newStatus);
         orderRepository.save(order);
     }
@@ -71,12 +71,18 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findByStatus(status);
     }
 
-    public ProductOrder getOrderById(int id) {
-        return orderRepository.findById(id);
+    public ProductOrder getOrderById(String id) {
+        return orderRepository.findByOrderId(id);
     }
     public List<ProductOrder> getAllOrders() {
         List<ProductOrder> orders = orderRepository.findAll();
         System.out.println("Orders: " + orders); // add a debug statement
+        return orders;
+    }
+
+    public List<ProductOrder> getOrderByUserId(int userId) {
+        List<ProductOrder> orders = orderRepository.findByUserId(userId);
+        System.out.println(orders.size() + "Orders for user " + userId);
         return orders;
     }
 
